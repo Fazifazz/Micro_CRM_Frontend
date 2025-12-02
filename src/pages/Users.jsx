@@ -7,19 +7,20 @@ import {
   updateUser,
 } from '../api/userservice'
 import { useNavigate } from 'react-router-dom'
+import '../styles/Master.css'
 
 const Users = () => {
   const [users, setUsers] = useState([])
   const [form, setForm] = useState({
     name: '',
     email: '',
-    phone: '',
+    password: '',
+    role: '',
   })
   const [editingId, setEditingId] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (users.length > 0) return
     fetchUsers()
   }, [])
 
@@ -45,7 +46,7 @@ const Users = () => {
       await createUser(form)
     }
 
-    setForm({ name: '', email: '', phone: '', notes: '' })
+    setForm({ name: '', email: '', password: '', role: '' })
     fetchUsers()
   }
 
@@ -63,75 +64,92 @@ const Users = () => {
   }
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Users</h2>
+    <div className="contacts-container">
+      <div className="contacts-card">
+        <h2>Users</h2>
 
-      <form onSubmit={submitForm}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-        />
-        {!form?.id && (
+        <form onSubmit={submitForm} className="contacts-form">
           <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password_hash}
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
             onChange={handleChange}
           />
-        )}
-        <select
-          name="role"
-          value={form.role}
-          onChange={handleChange}
-          className="form-control"
-        >
-          <option value="">Select Role</option>
-          <option value="admin">Admin</option>
-          <option value="member">Member</option>
-        </select>
 
-        <button type="submit">{editingId ? 'Update User' : 'Add User'}</button>
-      </form>
+          {!editingId && (
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
+            />
+          )}
 
-      <hr />
+          <select
+            name="role"
+            value={form.role}
+            onChange={handleChange}
+            className="select-input"
+          >
+            <option value="">Select Role</option>
+            <option value="admin">Admin</option>
+            <option value="member">Member</option>
+          </select>
 
-      <table border="1" cellPadding="5">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users?.map((c) => (
-            <tr key={c.id}>
-              <td>{c?.name}</td>
-              <td>{c?.email}</td>
-              <td>{c?.role}</td>
-              <td>
-                <button onClick={() => handleEdit(c)}>Edit</button>
-                <button onClick={() => handleDelete(c.id)}>Delete</button>
-              </td>
+          <button className="btn primary" type="submit">
+            {editingId ? 'Update User' : 'Add User'}
+          </button>
+        </form>
+
+        <table className="contacts-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users?.map((u) => (
+              <tr key={u.id}>
+                <td>{u?.name}</td>
+                <td>{u?.email}</td>
+                <td>{u?.role}</td>
+                <td>
+                  <button
+                    className="btn small edit"
+                    onClick={() => handleEdit(u)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn small delete"
+                    onClick={() => handleDelete(u.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      <button onClick={() => navigate('/')}>Home</button>
+        <button className="btn back" onClick={() => navigate('/')}>
+          ← Back to Home
+        </button>
+      </div>
     </div>
   )
 }

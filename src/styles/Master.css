@@ -1,0 +1,104 @@
+.contacts-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  background: #f4f6f8;
+  min-height: 100vh;
+}
+
+.contacts-card {
+  width: 90%;
+  max-width: 900px;
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contacts-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.contacts-form input {
+  padding: 12px;
+  border: 1px solid #cdd6df;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.contacts-form input:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+.btn {
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.btn.primary {
+  grid-column: span 2;
+  background: #3b82f6;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #1f6feb;
+}
+
+.contacts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.contacts-table th,
+.contacts-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  color: #444;
+}
+
+.contacts-table tr:hover {
+  background: #f9fafb;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 13px;
+  margin-right: 6px;
+}
+
+.btn.edit {
+  background: #10b981;
+  color: #fff;
+}
+
+.btn.delete {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn.back {
+  margin-top: 20px;
+  width: 100%;
+  background: #64748b;
+  color: white;
+}
+
+.btn.back:hover {
+  background: #475569;
+}

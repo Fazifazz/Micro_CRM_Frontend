@@ -7,6 +7,7 @@ import {
   updateContact,
 } from '../api/contactService'
 import { useNavigate } from 'react-router-dom'
+import '../styles/Master.css'
 
 const Contacts = () => {
   const [contacts, setContacts] = useState([])
@@ -62,74 +63,86 @@ const Contacts = () => {
   }
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Contacts</h2>
+    <div className="contacts-container">
+      <div className="contacts-card">
+        <h2>Contacts</h2>
 
-      <form onSubmit={submitForm}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone"
-          value={form.phone}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="notes"
-          placeholder="Notes"
-          value={form.notes}
-          onChange={handleChange}
-        />
+        <form onSubmit={submitForm} className="contacts-form">
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="Phone"
+            value={form.phone}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="notes"
+            placeholder="Notes"
+            value={form.notes}
+            onChange={handleChange}
+          />
 
-        <button type="submit">
-          {editingId ? 'Update Contact' : 'Add Contact'}
-        </button>
-      </form>
+          <button className="btn primary" type="submit">
+            {editingId ? 'Update Contact' : 'Add Contact'}
+          </button>
+        </form>
 
-      <hr />
-
-      <table border="1" cellPadding="5">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Notes</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contacts?.map((c) => (
-            <tr key={c.id}>
-              <td>{c?.name}</td>
-              <td>{c?.email}</td>
-              <td>{c?.phone}</td>
-              <td>{c?.notes}</td>
-              <td>
-                <button onClick={() => handleEdit(c)}>Edit</button>
-                <button onClick={() => handleDelete(c.id)}>Delete</button>
-              </td>
+        <table className="contacts-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Notes</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {contacts?.map((c) => (
+              <tr key={c.id}>
+                <td>{c?.name}</td>
+                <td>{c?.email}</td>
+                <td>{c?.phone}</td>
+                <td>{c?.notes}</td>
+                <td>
+                  <button
+                    className="btn small edit"
+                    onClick={() => handleEdit(c)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn small delete"
+                    onClick={() => handleDelete(c.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      <button onClick={() => navigate('/')}>Home</button>
+        <button className="btn back" onClick={() => navigate('/')}>
+          ← Back to Home
+        </button>
+      </div>
     </div>
   )
 }

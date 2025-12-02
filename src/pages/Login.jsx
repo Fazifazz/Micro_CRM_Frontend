@@ -2,6 +2,7 @@ import { useState, useContext } from 'react'
 import { login } from '../api/authService'
 import { AuthContext } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import '../styles/Login.css'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -22,30 +23,35 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{ padding: 50 }}>
-      <h2>Login</h2>
+    <div className="login-container">
+      <div className="login-card">
+        <h2>Welcome Back</h2>
+        <p className="subtitle">Login to continue</p>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <br />
+        <form onSubmit={handleSubmit}>
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="example@mail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <br />
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit" className="login-btn">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
