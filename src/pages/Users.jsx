@@ -19,12 +19,14 @@ const Users = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (users.length > 0) return
     fetchUsers()
   }, [])
 
   const fetchUsers = async () => {
-    const res = await getUsers()
-    setUsers(res.data)
+    await getUsers()
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.log(err))
   }
 
   const handleChange = (e) => {
@@ -80,13 +82,15 @@ const Users = () => {
           value={form.email}
           onChange={handleChange}
         />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone"
-          value={form.phone}
-          onChange={handleChange}
-        />
+        {!form?.id && (
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password_hash}
+            onChange={handleChange}
+          />
+        )}
         <select
           name="role"
           value={form.role}
