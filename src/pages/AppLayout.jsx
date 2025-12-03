@@ -15,7 +15,7 @@ export default function AppLayout() {
     getLoginedUser()
       .then((u) => loadUser(u?.data))
       .catch(() => loadUser(null))
-
+    // eslint-disable-next-line
   }, [])
 
   return (
